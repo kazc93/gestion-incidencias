@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="20dp"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/borde" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_punto" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="8dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/tvAccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="ASIGNACION"
+            android:textColor="@color/titulo"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvCambioEstado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Pendiente → Asignada"
+            android:textColor="@color/boton"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvResponsableAccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Por: Ana Pérez"
+            android:textColor="@color/texto_secundario"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvFechaAccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="20/10/2026 10:30"
+            android:textColor="@color/texto_secundario"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

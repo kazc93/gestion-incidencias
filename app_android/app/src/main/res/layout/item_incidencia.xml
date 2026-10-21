@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="6dp"
+    android:background="@drawable/bg_tarjeta_redonda"
+    android:elevation="2dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvListado"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:text="INC-2026-00001"
+            android:textColor="@color/texto_secundario"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_estado_pendiente"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:text="PENDIENTE"
+            android:textColor="@color/texto_pendiente"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Lámpara quemada"
+        android:textColor="@color/titulo"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Electricidad • Prioridad Media"
+        android:textColor="@color/texto_secundario"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/borde" />
+
+    <TextView
+        android:id="@+id/tvFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Reportado el: 20/10/2026"
+        android:textColor="@color/texto_secundario"
+        android:textSize="12sp" />
+</LinearLayout>
