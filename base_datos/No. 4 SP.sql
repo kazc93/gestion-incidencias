@@ -19,6 +19,7 @@ BEGIN
  DECLARE @v_pendiente INT
  DECLARE @v_numero INT
  DECLARE @v_folio VARCHAR(20)
+ DECLARE @v_anio VARCHAR(4)
  DECLARE @v_idIncidencia INT
 
  BEGIN TRY
@@ -61,9 +62,21 @@ BEGIN
  -- INICIAR TRANSACCION
  BEGIN TRANSACTION
 
- -- CALCULO FOLIO
- SELECT @v_numero = ISNULL(MAX(IncidenciaId),0) + 1 FROM dbo.Incidencia
- SET @v_folio = 'INC-' + CAST(YEAR(GETDATE()) AS VARCHAR(4)) + '-' + RIGHT('00000' + CAST(@v_numero AS VARCHAR(10)), 5)
+ -- BLOQUEO PARA QUE DOS REGISTROS NO GENEREN EL MISMO FOLIO
+ -- se libera solo al hacer COMMIT o ROLLBACK
+ EXEC sp_getapplock
+  @Resource = 'folio_incidencia',
+  @LockMode = 'Exclusive',
+  @LockOwner = 'Transaction'
+
+ -- CALCULO FOLIO (consecutivo por año, reinicia cada año)
+ SET @v_anio = CAST(YEAR(SYSDATETIME()) AS VARCHAR(4))
+
+ SELECT @v_numero = ISNULL(MAX(CAST(RIGHT(Folio, 5) AS INT)), 0) + 1
+ FROM dbo.Incidencia
+ WHERE Folio LIKE 'INC-' + @v_anio + '-%'
+
+ SET @v_folio = 'INC-' + @v_anio + '-' + RIGHT('00000' + CAST(@v_numero AS VARCHAR(10)), 5)
 
  -- INSERTA INCIDENCIA
  INSERT INTO dbo.Incidencia(
@@ -148,10 +161,14 @@ BEGIN
  DECLARE @v_asignada INT
 
  BEGIN TRY
- -- VALIDACIONES
+ -- INICIAR TRANSACCION
+ -- se abre antes de validar para que nadie cambie el estado mientras tanto
+ BEGIN TRANSACTION
 
+ -- VALIDACIONES
+ -- UPDLOCK bloquea la fila: si otro usuario asigna al mismo tiempo, espera aquí
  SELECT @v_estadoClave = e.Clave
- FROM dbo.Incidencia i
+ FROM dbo.Incidencia i WITH (UPDLOCK, HOLDLOCK)
  INNER JOIN dbo.EstadoIncidencia e
   ON i.EstadoId = e.EstadoId
  WHERE i.IncidenciaId = @idIncidencia
@@ -180,9 +197,6 @@ BEGIN
  -- OBTENER ESTADOS
  SELECT @v_pendiente = EstadoId FROM dbo.EstadoIncidencia WHERE Clave = 'PENDIENTE'
  SELECT @v_asignada = EstadoId FROM dbo.EstadoIncidencia WHERE Clave = 'ASIGNADA'
-
- -- INICIAR TRANSACCION
- BEGIN TRANSACTION
 
  -- INSERTA ASIGNACION
  INSERT INTO dbo.Asignacion(
@@ -247,12 +261,17 @@ BEGIN
  DECLARE @v_estadoClave VARCHAR(20)
  DECLARE @v_asignada INT
  DECLARE @v_enAtencion INT
+ DECLARE @v_idResponsable INT
 
  BEGIN TRY
- -- VALIDACIONES
+ -- INICIAR TRANSACCION
+ -- se abre antes de validar para que nadie cambie el estado mientras tanto
+ BEGIN TRANSACTION
 
+ -- VALIDACIONES
+ -- UPDLOCK bloquea la fila: si otro usuario la modifica al mismo tiempo, espera aquí
  SELECT @v_estadoClave = e.Clave
- FROM dbo.Incidencia i
+ FROM dbo.Incidencia i WITH (UPDLOCK, HOLDLOCK)
  INNER JOIN dbo.EstadoIncidencia e
   ON i.EstadoId = e.EstadoId
  WHERE i.IncidenciaId = @idIncidencia
@@ -263,7 +282,12 @@ BEGIN
   ;THROW 50001, N'La incidencia no existe',1;
  END
 
- IF NOT EXISTS(SELECT 1 FROM dbo.Asignacion WHERE IncidenciaId = @idIncidencia AND Activa = 1)
+ SELECT @v_idResponsable = ResponsableEmpleadoId
+ FROM dbo.Asignacion
+ WHERE IncidenciaId = @idIncidencia
+ AND Activa = 1
+
+ IF @v_idResponsable IS NULL
  BEGIN
   ;THROW 50001, N'No se puede iniciar la atención porque la incidencia no tiene responsable asignado',1;
  END
@@ -278,12 +302,14 @@ BEGIN
   ;THROW 50001, N'El empleado no existe o no está activo',1;
  END
 
+ IF @idEmpleado <> @v_idResponsable
+ BEGIN
+  ;THROW 50001, N'Solo el responsable asignado puede iniciar la atención',1;
+ END
+
  -- OBTENER ESTADOS
  SELECT @v_asignada = EstadoId FROM dbo.EstadoIncidencia WHERE Clave = 'ASIGNADA'
  SELECT @v_enAtencion = EstadoId FROM dbo.EstadoIncidencia WHERE Clave = 'EN_ATENCION'
-
- -- INICIAR TRANSACCION
- BEGIN TRANSACTION
 
  -- ACTUALIZA ESTADO
  UPDATE dbo.Incidencia
@@ -339,12 +365,17 @@ BEGIN
  DECLARE @v_estadoClave VARCHAR(20)
  DECLARE @v_enAtencion INT
  DECLARE @v_resuelta INT
+ DECLARE @v_idResponsable INT
 
  BEGIN TRY
- -- VALIDACIONES
+ -- INICIAR TRANSACCION
+ -- se abre antes de validar para que nadie cambie el estado mientras tanto
+ BEGIN TRANSACTION
 
+ -- VALIDACIONES
+ -- UPDLOCK bloquea la fila: si otro usuario la resuelve al mismo tiempo, espera aquí
  SELECT @v_estadoClave = e.Clave
- FROM dbo.Incidencia i
+ FROM dbo.Incidencia i WITH (UPDLOCK, HOLDLOCK)
  INNER JOIN dbo.EstadoIncidencia e
   ON i.EstadoId = e.EstadoId
  WHERE i.IncidenciaId = @idIncidencia
@@ -376,12 +407,19 @@ BEGIN
   ;THROW 50001, N'El empleado no existe o no está activo',1;
  END
 
+ SELECT @v_idResponsable = ResponsableEmpleadoId
+ FROM dbo.Asignacion
+ WHERE IncidenciaId = @idIncidencia
+ AND Activa = 1
+
+ IF @v_idResponsable IS NULL OR @idEmpleado <> @v_idResponsable
+ BEGIN
+  ;THROW 50001, N'Solo el responsable asignado puede resolver la incidencia',1;
+ END
+
  -- OBTENER ESTADOS
  SELECT @v_enAtencion = EstadoId FROM dbo.EstadoIncidencia WHERE Clave = 'EN_ATENCION'
  SELECT @v_resuelta = EstadoId FROM dbo.EstadoIncidencia WHERE Clave = 'RESUELTA'
-
- -- INICIAR TRANSACCION
- BEGIN TRANSACTION
 
  -- ACTUALIZA INCIDENCIA
  UPDATE dbo.Incidencia

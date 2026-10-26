@@ -60,7 +60,8 @@ where Responsable is null
 
 --incidencias por rango de fechas
 select * from dbo.vw_incidencias
-where FechaRegistro between '2026-01-01' and '2026-12-31'
+where FechaRegistro >= '2026-01-01'
+  and FechaRegistro < '2027-01-01'
 
 --incidencias resueltas con su solucion
 select i.Folio, i.Titulo, i.Solucion, i.FechaResolucion
