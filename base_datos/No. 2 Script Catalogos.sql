@@ -38,3 +38,10 @@ INSERT INTO dbo.Empleado (NumeroEmpleado, Nombre, Apellidos, Correo) VALUES
     ('EMP-005', N'Pedro',   N'Tzoc Batz',        'pedro.tzoc@ejemplo.com'),
     ('EMP-006', N'Sofía',   N'Ramírez Castillo', 'sofia.ramirez@ejemplo.com');
 GO
+
+--verificacion final
+SELECT 
+    (SELECT COUNT(*) FROM EstadoIncidencia) AS TotalEstados,
+    (SELECT COUNT(*) FROM Prioridad) AS TotalPrioridades,
+    (SELECT COUNT(*) FROM TipoIncidencia) AS TotalTipos,
+    (SELECT COUNT(*) FROM Empleado) AS TotalEmpleados;
