@@ -20,7 +20,7 @@ CREATE TABLE dbo.Empleado (
     Nombre         NVARCHAR(80)  NOT NULL,
     Apellidos      NVARCHAR(120) NOT NULL,
     Correo         NVARCHAR(120) NOT NULL,
-    Activo         BIT NOT NULL CONSTRAINT DF_Empleado_Activo DEFAULT (1),
+    Activo         INT NOT NULL CONSTRAINT DF_Empleado_Activo DEFAULT (1),
     CONSTRAINT PK_Empleado PRIMARY KEY (EmpleadoId),
     CONSTRAINT UQ_Empleado_Numero UNIQUE (NumeroEmpleado),
     CONSTRAINT UQ_Empleado_Correo UNIQUE (Correo)
@@ -32,7 +32,7 @@ CREATE TABLE dbo.TipoIncidencia (
     TipoId  INT IDENTITY(1,1) NOT NULL,
     Clave   VARCHAR(20)  NOT NULL,
     Nombre  NVARCHAR(80) NOT NULL,
-    Activo  BIT NOT NULL CONSTRAINT DF_Tipo_Activo DEFAULT (1),
+    Activo  INT NOT NULL CONSTRAINT DF_Tipo_Activo DEFAULT (1),
     CONSTRAINT PK_TipoIncidencia PRIMARY KEY (TipoId),
     CONSTRAINT UQ_Tipo_Clave UNIQUE (Clave)
 );
@@ -43,8 +43,8 @@ CREATE TABLE dbo.Prioridad (
     PrioridadId INT IDENTITY(1,1) NOT NULL,
     Clave       VARCHAR(20)  NOT NULL,
     Nombre      NVARCHAR(40) NOT NULL,
-    Nivel       TINYINT NOT NULL,
-    Activo      BIT NOT NULL CONSTRAINT DF_Prioridad_Activo DEFAULT (1),
+    Nivel       INT NOT NULL,
+    Activo      INT NOT NULL CONSTRAINT DF_Prioridad_Activo DEFAULT (1),
     CONSTRAINT PK_Prioridad PRIMARY KEY (PrioridadId),
     CONSTRAINT UQ_Prioridad_Clave UNIQUE (Clave),
     CONSTRAINT CK_Prioridad_Nivel CHECK (Nivel BETWEEN 1 AND 4)
@@ -56,8 +56,8 @@ CREATE TABLE dbo.EstadoIncidencia (
     EstadoId INT IDENTITY(1,1) NOT NULL,
     Clave    VARCHAR(20)  NOT NULL,
     Nombre   NVARCHAR(40) NOT NULL,
-    Orden    TINYINT NOT NULL,
-    Activo   BIT NOT NULL CONSTRAINT DF_Estado_Activo DEFAULT (1),
+    Orden    INT NOT NULL,
+    Activo   INT NOT NULL CONSTRAINT DF_Estado_Activo DEFAULT (1),
     CONSTRAINT PK_EstadoIncidencia PRIMARY KEY (EstadoId),
     CONSTRAINT UQ_Estado_Clave UNIQUE (Clave)
 );
@@ -77,11 +77,11 @@ CREATE TABLE dbo.Incidencia (
     PrioridadId        INT NOT NULL,
     EstadoId           INT NOT NULL,
     ReportaEmpleadoId  INT NOT NULL,
-    FechaRegistro      DATETIME2(0) NOT NULL
+    FechaRegistro      DATETIME NOT NULL
         CONSTRAINT DF_Incidencia_FechaRegistro DEFAULT (SYSDATETIME()),
     Solucion           NVARCHAR(1000) NULL,
-    FechaResolucion    DATETIME2(0)   NULL,
-    Activo             BIT NOT NULL
+    FechaResolucion    DATETIME   NULL,
+    Activo             INT NOT NULL
         CONSTRAINT DF_Incidencia_Activo DEFAULT (1),
 
     CONSTRAINT PK_Incidencia PRIMARY KEY (IncidenciaId),
@@ -107,10 +107,10 @@ CREATE TABLE dbo.Asignacion (
     IncidenciaId          INT NOT NULL,
     ResponsableEmpleadoId INT NOT NULL,
     AsignaEmpleadoId      INT NOT NULL,
-    FechaAsignacion       DATETIME2(0) NOT NULL
+    FechaAsignacion       DATETIME NOT NULL
         CONSTRAINT DF_Asignacion_Fecha DEFAULT (SYSDATETIME()),
     Comentario            NVARCHAR(400) NULL,
-    Activa                BIT NOT NULL
+    Activa                INT NOT NULL
         CONSTRAINT DF_Asignacion_Activa DEFAULT (1),
 
     CONSTRAINT PK_Asignacion PRIMARY KEY (AsignacionId),
@@ -130,7 +130,7 @@ CREATE TABLE dbo.Fotografia (
     TipoEvidencia     VARCHAR(10) NOT NULL,
     UrlAlmacenamiento NVARCHAR(400) NOT NULL,
     NombreArchivo     NVARCHAR(200) NOT NULL,
-    FechaCaptura      DATETIME2(0) NOT NULL
+    FechaCaptura      DATETIME NOT NULL
         CONSTRAINT DF_Fotografia_Fecha DEFAULT (SYSDATETIME()),
 
     CONSTRAINT PK_Fotografia PRIMARY KEY (FotografiaId),
@@ -150,7 +150,7 @@ CREATE TABLE dbo.HistorialIncidencia (
     Accion           VARCHAR(30) NOT NULL,
     EmpleadoAccionId INT NOT NULL,
     Comentario       NVARCHAR(1000) NULL,
-    FechaAccion      DATETIME2(0) NOT NULL
+    FechaAccion      DATETIME NOT NULL
         CONSTRAINT DF_Historial_Fecha DEFAULT (SYSDATETIME()),
 
     CONSTRAINT PK_Historial PRIMARY KEY (HistorialId),

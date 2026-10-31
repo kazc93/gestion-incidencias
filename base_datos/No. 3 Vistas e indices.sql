@@ -13,10 +13,11 @@ select
     t.Nombre as Tipo,
     p.Nombre as Prioridad,
     e.EstadoId,
+    e.Clave as EstadoClave,
     e.Nombre as Estado,
     i.FechaRegistro,
     concat(r.Nombre, ' ', r.Apellidos) as Reporta,
-    concat(re.Nombre, ' ', re.Apellidos) as Responsable
+    re.Nombre + ' ' + re.Apellidos as Responsable
 from dbo.Incidencia i
 inner join dbo.TipoIncidencia t
     on i.TipoId = t.TipoId
