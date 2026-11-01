@@ -1,5 +1,6 @@
 package com.example.incidencias
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.view.View
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +24,20 @@ class MainActivity : AppCompatActivity() {
         // lista de incidencias
         val rvIncidencias = findViewById<RecyclerView>(R.id.rvIncidencias)
         rvIncidencias.layoutManager = LinearLayoutManager(this)
-        rvIncidencias.adapter = IncidenciaAdapter(datosDePrueba())
+
+        rvIncidencias.adapter = IncidenciaAdapter(datosDePrueba()) { incidenciaSeleccionada ->
+            val intent = Intent(this, DetalleActivity::class.java)
+            intent.putExtra("folio", incidenciaSeleccionada.folio)
+            intent.putExtra("titulo", incidenciaSeleccionada.titulo)
+            intent.putExtra("tipo", incidenciaSeleccionada.tipo)
+            intent.putExtra("prioridad", incidenciaSeleccionada.prioridad)
+            intent.putExtra("estado", incidenciaSeleccionada.estado)
+            intent.putExtra("fecha", incidenciaSeleccionada.fecha)
+            startActivity(intent)
+        }
+        findViewById<View>(R.id.btnAgregar).setOnClickListener {
+            startActivity(Intent(this, RegistroActivity::class.java))
+        }
     }
 
     // datos temporales, se reemplazan cuando se conecte la API

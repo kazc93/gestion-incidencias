@@ -21,6 +21,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".RegistroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetalleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AsignarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IniciarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ResolverActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -7,8 +7,10 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class IncidenciaAdapter(private val lista: List<Incidencia>) :
-    RecyclerView.Adapter<IncidenciaAdapter.IncidenciaViewHolder>() {
+class IncidenciaAdapter(
+    private val lista: List<Incidencia>,
+    private val alTocar: (Incidencia) -> Unit
+) : RecyclerView.Adapter<IncidenciaAdapter.IncidenciaViewHolder>() {
 
     // guarda las vistas de cada tarjeta
     class IncidenciaViewHolder(vista: View) : RecyclerView.ViewHolder(vista) {
@@ -40,6 +42,9 @@ class IncidenciaAdapter(private val lista: List<Incidencia>) :
         holder.tvDetalle.text = "${incidencia.tipo} • Prioridad ${incidencia.prioridad}"
         holder.tvFecha.text = "Reportado el: ${incidencia.fecha}"
         holder.tvEstado.text = incidencia.estado.replace("_", " ")
+        holder.itemView.setOnClickListener {
+            alTocar(incidencia)
+        }
 
         // color de la pastilla según el estado
         when (incidencia.estado) {
