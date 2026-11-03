@@ -1,12 +1,14 @@
 package com.example.incidencias
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import android.widget.Button
+import android.widget.Spinner
+import android.widget.Toast
 
 class AsignarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +19,18 @@ class AsignarActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val spResponsable = findViewById<Spinner>(R.id.spResponsable)
+        val spAsigna = findViewById<Spinner>(R.id.spAsigna)
+
+        findViewById<Button>(R.id.btnConfirmarAsignacion).setOnClickListener {
+            if (spResponsable.selectedItem == null || spAsigna.selectedItem == null){
+                Toast.makeText(this, "Selecciona el responsable y quién asigna", Toast.LENGTH_SHORT).show()
+            } else {
+              //espera el api
+                Toast.makeText(this, "Datos válidos. Falta conectar el API", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // datos que llegaron desde el detalle

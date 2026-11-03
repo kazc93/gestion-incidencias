@@ -22,6 +22,7 @@ class DetalleActivity : AppCompatActivity() {
 
         // datos que llegaron desde la lista
         // el ?: "" significa: si no llegó nada, usar un texto vacío
+
         val folio = intent.getStringExtra("folio") ?: ""
         val titulo = intent.getStringExtra("titulo") ?: ""
         val tipo = intent.getStringExtra("tipo") ?: ""
@@ -36,7 +37,7 @@ class DetalleActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvDetalle).text = "$tipo • Prioridad $prioridad"
         findViewById<TextView>(R.id.tvFecha).text = "Reportado el: $fecha"
 
-        // estos datos vendrán de la API, por ahora no se inventan
+        // estos datos vendrán de la API
         findViewById<TextView>(R.id.tvDescripcion).text = "—"
         findViewById<TextView>(R.id.tvReporta).text = "Reportado por: —"
         findViewById<TextView>(R.id.tvResponsable).text = "—"
@@ -48,6 +49,7 @@ class DetalleActivity : AppCompatActivity() {
         when (estado) {
             "PENDIENTE" -> {
                 tvEstado.setBackgroundResource(R.drawable.bg_estado_pendiente)
+                tvEstado.setTextColor(getColor(R.color.texto_pendiente))
                 btnAccion.text = "ASIGNAR RESPONSABLE"
                 btnAccion.setOnClickListener {
                     val intent = Intent(this, AsignarActivity::class.java)
@@ -61,7 +63,7 @@ class DetalleActivity : AppCompatActivity() {
                 tvEstado.setTextColor(getColor(R.color.texto_asignada))
                 btnAccion.text = "INICIAR ATENCIÓN"
                 btnAccion.setOnClickListener {
-                    val intent = Intent(this, ResolverActivity::class.java)
+                    val intent = Intent(this, IniciarActivity::class.java)
                     intent.putExtra("folio", folio)
                     intent.putExtra("titulo", titulo)
                     startActivity(intent)

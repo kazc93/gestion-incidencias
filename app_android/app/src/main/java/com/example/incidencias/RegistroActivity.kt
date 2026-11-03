@@ -12,6 +12,8 @@ import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.io.File
+import android.widget.EditText
+import android.widget.Toast
 
 class RegistroActivity : AppCompatActivity() {
     private var uriFoto: Uri? = null
@@ -43,6 +45,24 @@ class RegistroActivity : AppCompatActivity() {
             val uri = FileProvider.getUriForFile(this, "$packageName.fileprovider", archivo)
             uriFoto = uri
             camara.launch(uri)
+        }
+        findViewById<Button>(R.id.btnGuardar).setOnClickListener {
+            val etTitulo = findViewById<EditText>(R.id.etTitulo)
+            val etDescripcion = findViewById<EditText>(R.id.etDescripcion)
+            val titulo = etTitulo.text.toString().trim()
+            val desripcion = etDescripcion.text.toString().trim()
+            val foto = archivoFoto
+
+            if (titulo.length < 5){
+                etTitulo.error = "El título debe tener al menos 5 caracteres"
+            }else if (desripcion.isEmpty()){
+                etDescripcion.error = "La descripción es obligatoria"
+            } else if (foto == null || foto.length() == 0L) {
+                Toast.makeText(this, "Debe tomar la fotografía inicial", Toast.LENGTH_SHORT).show()
+            } else {
+                //espera de API
+                Toast.makeText(this, "Datos válidos. Falta conectar la API", Toast.LENGTH_SHORT).show()
+            }
         }
 
         val ruta = savedInstanceState?.getString("rutaFoto")

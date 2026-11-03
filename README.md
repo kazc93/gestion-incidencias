@@ -73,6 +73,8 @@ La conexión con la API se documentará cuando el docente entregue la URL y el c
 
 - Kevin Eleazar Azurdia Chamalé (000137188)
 - Kendall Nathanael Mux Chex (000150250)
+- Jefry Fernando Berduo Pérez (000147971)
+- Emerson Josué Vicente Martinez (000151734)
 
 
 **Docente:** Julio Edgar Barreda Ramírez
