@@ -15,12 +15,11 @@ import java.io.File
 
 class RegistroActivity : AppCompatActivity() {
     private var uriFoto: Uri? = null
+    private var archivoFoto: File? = null
 
     private val camara = registerForActivityResult(ActivityResultContracts.TakePicture()) { exito ->
         if (exito) {
-            val ivFoto = findViewById<ImageView>(R.id.ivFoto)
-            ivFoto.setImageURI(uriFoto)
-            ivFoto.visibility = View.VISIBLE
+            mostrarFoto()
         }
     }
 
@@ -40,9 +39,32 @@ class RegistroActivity : AppCompatActivity() {
                 carpeta.mkdirs()
             }
             val archivo = File(carpeta, "${System.currentTimeMillis()}.jpg")
+            archivoFoto = archivo
             val uri = FileProvider.getUriForFile(this, "$packageName.fileprovider", archivo)
             uriFoto = uri
             camara.launch(uri)
         }
+
+        val ruta = savedInstanceState?.getString("rutaFoto")
+        if (ruta != null) {
+            val archivo = File(ruta)
+            archivoFoto = archivo
+            uriFoto = FileProvider.getUriForFile(this, "$packageName.fileprovider", archivo)
+
+            if (archivo.length() > 0) {
+                mostrarFoto()
+            }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("rutaFoto", archivoFoto?.absolutePath)
+    }
+
+    private fun mostrarFoto() {
+        val ivFoto = findViewById<ImageView>(R.id.ivFoto)
+        ivFoto.setImageURI(uriFoto)
+        ivFoto.visibility = View.VISIBLE
     }
 }
