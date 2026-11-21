@@ -10,3 +10,6 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# Modelos que Gson llena por reflexión: conservar nombres de campos
+-keep class com.example.incidencias.data.model.** { *; }

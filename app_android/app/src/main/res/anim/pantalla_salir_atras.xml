@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- la pantalla anterior se aleja un poco y se oscurece -->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="320"
+    android:interpolator="@android:anim/decelerate_interpolator">
+    <translate
+        android:fromXDelta="0"
+        android:toXDelta="-10%" />
+    <alpha
+        android:fromAlpha="1"
+        android:toAlpha="0.3" />
+</set>

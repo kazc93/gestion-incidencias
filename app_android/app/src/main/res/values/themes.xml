@@ -1,9 +1,110 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Incidencias" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Tema oscuro siempre (no depende del modo del sistema) -->
+    <style name="Base.Theme.Incidencias" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/boton</item>
+        <item name="colorOnPrimary">@color/blanco</item>
+        <item name="colorSecondary">@color/acento_fin</item>
+        <item name="colorSurface">@color/fondo_tarjeta</item>
+        <item name="colorOnSurface">@color/titulo</item>
+        <item name="colorError">@color/rojo</item>
+        <item name="android:colorBackground">@color/fondo_principal</item>
+        <item name="android:windowBackground">@color/fondo_principal</item>
+        <item name="android:textColorPrimary">@color/titulo</item>
+        <item name="android:textColorSecondary">@color/texto_secundario</item>
+        <item name="android:colorControlActivated">@color/boton</item>
+        <item name="android:textColorHighlight">@color/acento_brillo</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        <!-- transiciones entre pantallas -->
+        <item name="android:windowAnimationStyle">@style/Animacion.Pantallas</item>
+        <!-- los botones usan nuestros fondos degradados sin el tinte de Material -->
+        <item name="materialButtonStyle">@style/Widget.Incidencias.Boton</item>
+        <!-- popup oscuro de los spinners -->
+        <item name="android:dropDownListViewStyle">@style/Widget.Incidencias.ListaDesplegable</item>
     </style>
 
     <style name="Theme.Incidencias" parent="Base.Theme.Incidencias" />
+
+    <style name="Animacion.Pantallas" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/pantalla_entrar</item>
+        <item name="android:activityOpenExitAnimation">@anim/pantalla_salir_atras</item>
+        <item name="android:activityCloseEnterAnimation">@anim/pantalla_volver_adelante</item>
+        <item name="android:activityCloseExitAnimation">@anim/pantalla_cerrar</item>
+    </style>
+
+    <style name="Widget.Incidencias.Boton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@null</item>
+        <item name="android:background">@drawable/bg_boton_naranja</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textColor">@color/blanco</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:stateListAnimator">@animator/presion_escala</item>
+    </style>
+
+    <!-- FAB tipo píldora -->
+    <style name="Forma.Fab" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Widget.Incidencias.ListaDesplegable" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@color/borde</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <!-- textos reutilizables -->
+    <style name="Texto" />
+
+    <style name="Texto.Etiqueta">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/texto_secundario</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Texto.TituloPantalla">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/titulo</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Campo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/bg_cajas_entrada</item>
+        <item name="android:textColor">@color/titulo</item>
+        <item name="android:textColorHint">@color/texto_tenue</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">18dp</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <style name="CampoSpinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:background">@drawable/bg_spinner</item>
+        <item name="android:popupBackground">@drawable/bg_popup</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingEnd">40dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">18dp</item>
+        <item name="android:dropDownVerticalOffset">56dp</item>
+        <item name="android:stateListAnimator">@animator/presion_escala</item>
+    </style>
+
+    <style name="Tarjeta">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_tarjeta_redonda</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:layout_marginBottom">14dp</item>
+    </style>
 </resources>

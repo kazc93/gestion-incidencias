@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_focused="true">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/fondo_campo" />
-            <stroke android:width="2dp" android:color="@color/boton" />
-            <corners android:radius="12dp" />
-        </shape>
-    </item>
-    <item>
-        <shape android:shape="rectangle">
-            <solid android:color="@color/fondo_campo" />
-            <stroke android:width="1dp" android:color="@color/borde" />
-            <corners android:radius="12dp" />
-        </shape>
-    </item>
-</selector>
+<!-- tarjeta oscura con un leve degradado y borde sutil -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:endColor="@color/fondo_tarjeta"
+        android:startColor="@color/fondo_tarjeta_alta" />
+    <stroke android:width="1dp" android:color="@color/borde" />
+    <corners android:radius="20dp" />
+</shape>

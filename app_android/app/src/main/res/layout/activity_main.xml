@@ -8,43 +8,79 @@
     android:background="@color/fondo_principal"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Incidencias"
-        android:textColor="@color/titulo"
-        android:textSize="26sp" />
-
+    <!-- encabezado con brillo de color -->
     <LinearLayout
+        android:id="@+id/llEncabezado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal">
+        android:background="@drawable/bg_encabezado"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="16dp">
 
-        <Spinner
-            android:id="@+id/spFiltroEstado"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_spinner"
-            android:paddingStart="8dp"
-            android:paddingEnd="36dp" />
+        <TextView
+            style="@style/Texto.Etiqueta"
+            android:text="Panel de seguimiento"
+            android:textColor="@color/acento_fin" />
 
-        <Spinner
-            android:id="@+id/spFiltroTipo"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_spinner"
-            android:paddingStart="8dp"
-            android:paddingEnd="36dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-black"
+                android:text="Incidencias"
+                android:textColor="@color/titulo"
+                android:textSize="32sp" />
+
+            <TextView
+                android:id="@+id/tvContador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip_contador"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:textColor="@color/titulo"
+                android:textSize="13sp"
+                android:visibility="invisible"
+                tools:text="12 activas"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spFiltroEstado"
+                style="@style/CampoSpinner"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/spFiltroTipo"
+                style="@style/CampoSpinner"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout
@@ -57,20 +93,50 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingTop="8dp"
-            android:paddingBottom="96dp"
+            android:layoutAnimation="@anim/cascada_items"
+            android:paddingTop="6dp"
+            android:paddingBottom="104dp"
             tools:listitem="@layout/item_incidencia" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <!-- estado de carga de la lista -->
+        <ProgressBar
+            android:id="@+id/pbCargando"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/boton"
+            android:visibility="gone" />
+
+        <!-- lista vacía o error de conexión -->
+        <TextView
+            android:id="@+id/tvMensajeLista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:paddingHorizontal="40dp"
+            android:textColor="@color/texto_secundario"
+            android:textSize="15sp"
+            android:visibility="gone"
+            tools:text="No hay incidencias registradas"
+            tools:visibility="visible" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btnAgregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="20dp"
-            android:backgroundTint="@color/boton"
-            android:contentDescription="Nueva Incidencia"
-            android:src="@android:drawable/ic_input_add"
-            app:tint="@color/blanco" />
+            android:contentDescription="Nueva incidencia"
+            android:fontFamily="sans-serif-medium"
+            android:stateListAnimator="@animator/presion_escala"
+            android:text="Nueva"
+            android:textColor="@color/blanco"
+            app:backgroundTint="@color/boton"
+            app:icon="@drawable/ic_agregar"
+            app:iconTint="@color/blanco"
+            app:shapeAppearanceOverlay="@style/Forma.Fab" />
 
     </FrameLayout>
 

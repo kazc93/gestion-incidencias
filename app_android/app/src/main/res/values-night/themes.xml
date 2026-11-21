@@ -1,7 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Incidencias" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <!-- La app usa siempre el tema oscuro definido en values/themes.xml.
+         Aquí se repite igual para que el modo noche del sistema no lo cambie. -->
+    <style name="Base.Theme.Incidencias" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/boton</item>
+        <item name="colorOnPrimary">@color/blanco</item>
+        <item name="colorSecondary">@color/acento_fin</item>
+        <item name="colorSurface">@color/fondo_tarjeta</item>
+        <item name="colorOnSurface">@color/titulo</item>
+        <item name="colorError">@color/rojo</item>
+        <item name="android:colorBackground">@color/fondo_principal</item>
+        <item name="android:windowBackground">@color/fondo_principal</item>
+        <item name="android:textColorPrimary">@color/titulo</item>
+        <item name="android:textColorSecondary">@color/texto_secundario</item>
+        <item name="android:colorControlActivated">@color/boton</item>
+        <item name="android:textColorHighlight">@color/acento_brillo</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        <item name="android:windowAnimationStyle">@style/Animacion.Pantallas</item>
+        <item name="materialButtonStyle">@style/Widget.Incidencias.Boton</item>
+        <item name="android:dropDownListViewStyle">@style/Widget.Incidencias.ListaDesplegable</item>
     </style>
 </resources>

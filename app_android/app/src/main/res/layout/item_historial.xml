@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <!-- línea de tiempo -->
     <FrameLayout
-        android:layout_width="20dp"
+        android:layout_width="22dp"
         android:layout_height="match_parent">
 
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="@color/borde" />
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_linea_tiempo" />
 
         <View
-            android:layout_width="12dp"
-            android:layout_height="12dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="3dp"
             android:background="@drawable/bg_punto" />
     </FrameLayout>
 
@@ -27,43 +30,46 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingStart="8dp"
-        android:paddingBottom="16dp">
+        android:paddingStart="12dp"
+        android:paddingBottom="20dp">
 
         <TextView
             android:id="@+id/tvAccion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:text="ASIGNACION"
+            android:letterSpacing="0.06"
             android:textColor="@color/titulo"
-            android:textSize="15sp" />
+            android:textSize="14sp"
+            tools:text="ASIGNACION" />
 
         <TextView
             android:id="@+id/tvCambioEstado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Pendiente → Asignada"
-            android:textColor="@color/boton"
-            android:textSize="14sp" />
+            android:layout_marginTop="3dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/acento_fin"
+            android:textSize="13sp"
+            tools:text="REGISTRADA → ASIGNADA" />
 
         <TextView
             android:id="@+id/tvResponsableAccion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Por: Ana Pérez"
+            android:layout_marginTop="4dp"
+            android:lineSpacingExtra="2dp"
             android:textColor="@color/texto_secundario"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            tools:text="Por: Ana López" />
 
         <TextView
             android:id="@+id/tvFechaAccion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="20/10/2026 10:30"
-            android:textColor="@color/texto_secundario"
-            android:textSize="12sp" />
+            android:textColor="@color/texto_tenue"
+            android:textSize="12sp"
+            tools:text="20/10/2026 10:30" />
     </LinearLayout>
 </LinearLayout>

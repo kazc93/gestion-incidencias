@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- aplica item_entrada a cada hijo con un pequeño retraso entre uno y otro -->
+<layoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:animation="@anim/item_entrada"
+    android:animationOrder="normal"
+    android:delay="12%" />

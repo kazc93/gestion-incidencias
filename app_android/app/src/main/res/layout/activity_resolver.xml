@@ -1,10 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fondo_principal"
     android:orientation="vertical">
+
+    <!-- encabezado -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_encabezado"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="14dp">
+
+        <ImageButton
+            android:id="@+id/btnVolver"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_icono_circular"
+            android:contentDescription="Volver"
+            android:src="@drawable/ic_atras"
+            android:stateListAnimator="@animator/presion_escala" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Texto.Etiqueta"
+                android:text="Paso 4 de 4"
+                android:textColor="@color/texto_resuelta" />
+
+            <TextView
+                style="@style/Texto.TituloPantalla"
+                android:text="Resolver incidencia" />
+        </LinearLayout>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,93 +55,84 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/cascada_secciones"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingHorizontal="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="Resolver incidencia"
-                android:textColor="@color/titulo"
-                android:textSize="26sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_tarjeta_redonda"
-                android:elevation="4dp"
-                android:orientation="vertical"
-                android:padding="20dp">
+            <!-- incidencia -->
+            <LinearLayout style="@style/Tarjeta">
 
                 <TextView
                     android:id="@+id/tvFolio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="INC-2026-00001"
-                    android:textColor="@color/texto_secundario"
-                    android:textSize="13sp" />
+                    android:fontFamily="monospace"
+                    android:textColor="@color/acento_fin"
+                    android:textSize="13sp"
+                    tools:text="INC-2026-00001" />
 
                 <TextView
                     android:id="@+id/tvTitulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="6dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Lámpara quemada"
                     android:textColor="@color/titulo"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:text="Lámpara quemada" />
+            </LinearLayout>
+
+            <!-- solución -->
+            <LinearLayout style="@style/Tarjeta">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Resuelto por"
-                    android:textColor="@color/texto_secundario"
-                    android:textSize="14sp" />
+                    style="@style/Texto.Etiqueta"
+                    android:text="Resuelto por" />
 
                 <Spinner
                     android:id="@+id/spEmpleado"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/bg_spinner"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="36dp" />
+                    style="@style/CampoSpinner" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Descripción de la solución"
-                    android:textColor="@color/texto_secundario"
-                    android:textSize="14sp" />
+                    style="@style/Texto.Etiqueta"
+                    android:text="Descripción de la solución" />
 
                 <EditText
                     android:id="@+id/etSolucion"
-                    android:layout_width="match_parent"
-                    android:layout_height="110dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/bg_cajas_entrada"
+                    style="@style/Campo"
+                    android:layout_height="120dp"
+                    android:layout_marginBottom="0dp"
                     android:gravity="top"
                     android:hint="Describe qué se hizo para resolverla"
+                    android:importantForAutofill="no"
                     android:inputType="textCapSentences|textMultiLine"
-                    android:padding="16dp"
-                    android:textColor="@color/titulo"
-                    android:textColorHint="@color/texto_secundario"
-                    android:textSize="15sp" />
+                    android:padding="16dp" />
+            </LinearLayout>
+
+            <!-- evidencia final -->
+            <LinearLayout style="@style/Tarjeta">
+
+                <TextView
+                    style="@style/Texto.Etiqueta"
+                    android:text="Evidencia final" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="14dp"
+                    android:text="Obligatoria: toma una foto del trabajo terminado."
+                    android:textColor="@color/texto_tenue"
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:id="@+id/ivFotoFinal"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="200dp"
                     android:layout_marginBottom="12dp"
-                    android:background="@drawable/bg_cajas_entrada"
+                    android:background="@drawable/bg_foto"
                     android:clipToOutline="true"
                     android:contentDescription="Vista previa de la fotografía final"
                     android:scaleType="centerCrop"
@@ -111,11 +141,15 @@
                 <Button
                     android:id="@+id/btnTomarFotoFinal"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="54dp"
                     android:background="@drawable/bg_boton_secundario"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="TOMAR FOTOGRAFÍA FINAL"
-                    android:textColor="@color/titulo" />
+                    android:text="Tomar fotografía final"
+                    android:textAllCaps="false"
+                    android:textColor="@color/titulo"
+                    app:icon="@drawable/ic_camara"
+                    app:iconGravity="textStart"
+                    app:iconPadding="10dp"
+                    app:iconTint="@color/boton" />
             </LinearLayout>
 
         </LinearLayout>
@@ -124,12 +158,11 @@
     <Button
         android:id="@+id/btnConfirmarResolucion"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_boton_naranja"
-        android:fontFamily="sans-serif-medium"
+        android:layout_height="58dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
         android:text="RESOLVER INCIDENCIA"
-        android:textColor="@color/blanco"
-        android:textSize="16sp" />
+        android:textSize="15sp" />
 
 </LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- tarjeta de la lista con ripple violeta al tocar -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/acento_brillo">
+    <item android:drawable="@drawable/bg_tarjeta_redonda" />
+</ripple>

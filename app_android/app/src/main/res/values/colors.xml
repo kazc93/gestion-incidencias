@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="fondo_principal">#F3F4F6</color>
-    <color name="fondo_tarjeta">#FFFFFF</color>
-    <color name="fondo_campo">#F9FAFB</color>
-    <color name="borde">#E5E7EB</color>
-    <color name="titulo">#111827</color>
-    <color name="texto_secundario">#6B7280</color>
+    <!-- Paleta oscura "midnight" con acento violeta → cian -->
+    <color name="fondo_principal">#0A0E1A</color>
+    <color name="fondo_tarjeta">#131A2B</color>
+    <color name="fondo_tarjeta_alta">#1A2238</color>
+    <color name="fondo_campo">#0F1524</color>
+    <color name="borde">#243049</color>
+    <color name="borde_foco">#8B5CF6</color>
+    <color name="titulo">#F1F5F9</color>
+    <color name="texto_secundario">#8A97B1</color>
+    <color name="texto_tenue">#5B6782</color>
     <color name="blanco">#FFFFFF</color>
-    <color name="boton">#EA580C</color>
-    <color name="rojo">#DC2626</color>
+    <color name="boton">#8B5CF6</color>
+    <color name="rojo">#F43F5E</color>
 
-    <color name="fondo_pendiente">#FEE2E2</color>
-    <color name="texto_pendiente">#B91C1C</color>
-    <color name="fondo_asignada">#DBEAFE</color>
-    <color name="texto_asignada">#1D4ED8</color>
-    <color name="fondo_en_atencion">#FEF3C7</color>
-    <color name="texto_en_atencion">#B45309</color>
-    <color name="fondo_resuelta">#DCFCE7</color>
-    <color name="texto_resuelta">#15803D</color>
+    <!-- degradado de acento (botones, encabezados, FAB) -->
+    <color name="acento_inicio">#7C3AED</color>
+    <color name="acento_medio">#6366F1</color>
+    <color name="acento_fin">#06B6D4</color>
+    <color name="acento_brillo">#338B5CF6</color>
+    <color name="acento_brillo_cian">#2206B6D4</color>
+    <color name="ripple_claro">#33FFFFFF</color>
+
+    <!-- estados: fondo translúcido + texto neón -->
+    <color name="fondo_pendiente">#2E1520</color>
+    <color name="texto_pendiente">#FB7185</color>
+    <color name="fondo_asignada">#14223F</color>
+    <color name="texto_asignada">#60A5FA</color>
+    <color name="fondo_en_atencion">#2E2410</color>
+    <color name="texto_en_atencion">#FBBF24</color>
+    <color name="fondo_resuelta">#0F2A22</color>
+    <color name="texto_resuelta">#34D399</color>
 </resources>

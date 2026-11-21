@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- opción seleccionada que se ve dentro del spinner cerrado -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="8dp"
+    android:textColor="@color/titulo"
+    android:textSize="15sp" />

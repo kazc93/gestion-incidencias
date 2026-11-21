@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- sacudida horizontal para señalar un campo con error -->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="420"
+    android:fromXDelta="0"
+    android:interpolator="@anim/ciclo_sacudir"
+    android:toXDelta="10dp" />
