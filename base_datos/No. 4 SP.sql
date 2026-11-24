@@ -473,3 +473,188 @@ BEGIN
  END CATCH
 END
 GO
+
+--procedimientos de consulta para la API
+--la API del docente llama estos procedimientos para los catalogos, el listado y el detalle
+--los nombres y las columnas que devuelven son los que espera la API (no cambiarlos)
+
+--catalogo de estados (columnas: Id, Clave, Nombre)
+CREATE OR ALTER PROCEDURE dbo.sp_listar_estados
+AS
+BEGIN
+ SET NOCOUNT ON
+
+ SELECT
+  EstadoId AS Id,
+  Clave,
+  Nombre
+ FROM dbo.EstadoIncidencia
+ WHERE Activo = 1
+ ORDER BY Orden
+END
+GO
+
+--catalogo de tipos de incidencia
+CREATE OR ALTER PROCEDURE dbo.sp_listar_tipos
+AS
+BEGIN
+ SET NOCOUNT ON
+
+ SELECT
+  TipoId AS Id,
+  Clave,
+  Nombre
+ FROM dbo.TipoIncidencia
+ WHERE Activo = 1
+ ORDER BY Nombre
+END
+GO
+
+--catalogo de prioridades, de la mas baja a la mas alta
+CREATE OR ALTER PROCEDURE dbo.sp_listar_prioridades
+AS
+BEGIN
+ SET NOCOUNT ON
+
+ SELECT
+  PrioridadId AS Id,
+  Clave,
+  Nombre
+ FROM dbo.Prioridad
+ WHERE Activo = 1
+ ORDER BY Nivel
+END
+GO
+
+--catalogo de empleados
+--Clave es el numero de empleado y Nombre es el nombre completo
+CREATE OR ALTER PROCEDURE dbo.sp_listar_empleados
+AS
+BEGIN
+ SET NOCOUNT ON
+
+ SELECT
+  EmpleadoId AS Id,
+  CAST(NumeroEmpleado AS NVARCHAR(20)) AS Clave,
+  CONCAT(Nombre, N' ', Apellidos) AS Nombre
+ FROM dbo.Empleado
+ WHERE Activo = 1
+ ORDER BY Nombre, Apellidos
+END
+GO
+
+--listado de incidencias con filtros opcionales por estado y por tipo
+--usa la vista vw_incidencias del script No. 3
+CREATE OR ALTER PROCEDURE dbo.sp_listar_incidencias
+(
+ @estadoId INT = NULL,
+ @tipoId INT = NULL
+)
+AS
+BEGIN
+ SET NOCOUNT ON
+
+ SELECT
+  v.IncidenciaId AS Id,
+  v.Folio,
+  v.Titulo,
+  v.Tipo,
+  v.Prioridad,
+  v.EstadoId,
+  v.EstadoClave,
+  v.Estado,
+  v.FechaRegistro,
+  v.Reporta,
+  v.Responsable
+ FROM dbo.vw_incidencias v
+ WHERE (@estadoId IS NULL OR v.EstadoId = @estadoId)
+ AND (@tipoId IS NULL OR v.TipoId = @tipoId)
+ ORDER BY v.FechaRegistro DESC, v.IncidenciaId DESC
+END
+GO
+
+--detalle de una incidencia
+--devuelve 3 resultados en este orden: datos generales, fotografias e historial
+--si la incidencia no existe lanza el error 50002, que la API devuelve como 404
+CREATE OR ALTER PROCEDURE dbo.sp_obtener_incidencia
+(
+ @idIncidencia INT
+)
+AS
+BEGIN
+ SET NOCOUNT ON
+
+ IF NOT EXISTS(SELECT 1 FROM dbo.Incidencia WHERE IncidenciaId = @idIncidencia AND Activo = 1)
+ BEGIN
+  ;THROW 50002, N'La incidencia no existe',1;
+ END
+
+ -- 1. DATOS GENERALES
+ SELECT
+  i.IncidenciaId AS Id,
+  i.Folio,
+  i.Titulo,
+  i.Descripcion,
+  t.Nombre AS Tipo,
+  p.Nombre AS Prioridad,
+  e.EstadoId,
+  e.Clave AS EstadoClave,
+  e.Nombre AS Estado,
+  i.FechaRegistro,
+  CONCAT(r.Nombre, N' ', r.Apellidos) AS Reporta,
+  a.ResponsableEmpleadoId AS ResponsableId,
+  re.Nombre + N' ' + re.Apellidos AS Responsable,
+  i.Solucion,
+  i.FechaResolucion
+ FROM dbo.Incidencia i
+ INNER JOIN dbo.TipoIncidencia t
+  ON i.TipoId = t.TipoId
+ INNER JOIN dbo.Prioridad p
+  ON i.PrioridadId = p.PrioridadId
+ INNER JOIN dbo.EstadoIncidencia e
+  ON i.EstadoId = e.EstadoId
+ INNER JOIN dbo.Empleado r
+  ON i.ReportaEmpleadoId = r.EmpleadoId
+ LEFT JOIN dbo.Asignacion a
+  ON i.IncidenciaId = a.IncidenciaId
+  AND a.Activa = 1
+ LEFT JOIN dbo.Empleado re
+  ON a.ResponsableEmpleadoId = re.EmpleadoId
+ WHERE i.IncidenciaId = @idIncidencia
+
+ -- 2. FOTOGRAFIAS (INICIAL y FINAL)
+ SELECT
+  f.TipoEvidencia,
+  f.UrlAlmacenamiento AS Url,
+  f.NombreArchivo,
+  f.FechaCaptura
+ FROM dbo.Fotografia f
+ WHERE f.IncidenciaId = @idIncidencia
+ ORDER BY f.FechaCaptura, f.FotografiaId
+
+ -- 3. HISTORIAL
+ SELECT
+  h.Accion,
+  eo.Nombre AS EstadoOrigen,
+  ed.Nombre AS EstadoDestino,
+  CONCAT(em.Nombre, N' ', em.Apellidos) AS HechoPor,
+  h.Comentario,
+  h.FechaAccion
+ FROM dbo.HistorialIncidencia h
+ LEFT JOIN dbo.EstadoIncidencia eo
+  ON h.EstadoOrigenId = eo.EstadoId
+ INNER JOIN dbo.EstadoIncidencia ed
+  ON h.EstadoDestinoId = ed.EstadoId
+ INNER JOIN dbo.Empleado em
+  ON h.EmpleadoAccionId = em.EmpleadoId
+ WHERE h.IncidenciaId = @idIncidencia
+ ORDER BY h.FechaAccion, h.HistorialId
+END
+GO
+
+--verificacion final
+--deben aparecer los 10 procedimientos
+SELECT name AS Procedimiento
+FROM sys.procedures
+ORDER BY name;
+GO
