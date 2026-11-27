@@ -24,7 +24,7 @@ Las reglas del flujo se aplican dentro de los procedimientos almacenados de la b
 
 | Carpeta | Contenido |
 | --- | --- |
-| `base_datos` | Scripts SQL numerados del No. 1 al No. 6 |
+| `base_datos` | Scripts SQL numerados del No. 1 al No. 6 y las fotos de los datos de prueba (`fotos_prueba`) |
 | `app_android` | Proyecto de la aplicación Android |
 | `api_correcciones` | Controlador corregido de la API (`/api/prioridades`) e instrucciones para publicarla |
 | `documentacion` | Diseño, documentación del sistema, manual de usuario y la carpeta `figuras` con los diagramas |
@@ -77,7 +77,7 @@ El detalle de instalación, configuración, endpoints, errores y solución de pr
 | Base de datos (6 scripts, 10 procedimientos) | Terminada y probada |
 | Pruebas de base de datos (31 casos) | Terminadas, con evidencia |
 | Aplicación Android | Terminada y conectada a la API |
-| Pruebas de API (10 casos) y de la aplicación (12 casos) | Definidas, pendientes de ejecutar con evidencia |
+| Pruebas de API (10 casos) y de la aplicación (11 casos) | Terminadas: 52 de 52 casos aprobados, con evidencia |
 | Documentación y manual de usuario | Terminados |
 
 ## Documentación
