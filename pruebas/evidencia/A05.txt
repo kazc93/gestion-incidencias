@@ -1,0 +1,37 @@
+﻿Prueba A05 - 2026-11-23 21:26:23
+Archivo enviado: foto_registro.jpg (JPEG real 64x64, 693 bytes, cabecera FF D8 FF)
+
+### Petición
+curl.exe -X POST http://localhost:5000/api/incidencias --form-string "titulo=Proyector no enciende" --form-string "descripcion=El proyector del salón 3 no enciende al conectarlo" --form-string idTipo=1 --form-string idPrioridad=2 --form-string idReporta=1 -F foto=@foto_registro.jpg;type=image/jpeg
+
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:26:23 GMT
+Server: Kestrel
+Location: http://localhost:5000/api/incidencias/9
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Incidencia registrada correctamente","data":{"incidenciaId":9,"folio":"INC-2026-00009","estado":"PENDIENTE"}}
+
+
+### Petición
+curl.exe http://localhost:5000/api/incidencias/9
+
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:26:23 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Detalle de incidencia obtenido correctamente","data":{"descripcion":"El proyector del salón 3 no enciende al conectarlo","responsableId":null,"solucion":null,"fechaResolucion":null,"fotos":[{"tipoEvidencia":"INICIAL","url":"http://localhost:5000/fotos/8123f0fbabfd48b4a27f67885aee52ba.jpg","nombreArchivo":"8123f0fbabfd48b4a27f67885aee52ba.jpg","fechaCaptura":"2026-11-23T21:26:23.86"}],"historial":[{"accion":"REGISTRO","estadoOrigen":null,"estadoDestino":"Pendiente","hechoPor":"Carlos Morales López","comentario":"Incidencia registrada","fechaAccion":"2026-11-23T21:26:23.86"}],"id":9,"folio":"INC-2026-00009","titulo":"Proyector no enciende","tipo":"Red e internet","prioridad":"Media","estadoId":1,"estadoClave":"PENDIENTE","estado":"Pendiente","fechaRegistro":"2026-11-23T21:26:23.86","reporta":"Carlos Morales López","responsable":null}}
+
+
+### Petición (descarga de la foto devuelta por GET /api/incidencias/9)
+curl.exe -s -o NUL -w "HTTP %{http_code} ..." http://localhost:5000/fotos/8123f0fbabfd48b4a27f67885aee52ba.jpg
+
+### Respuesta
+HTTP 200  Content-Type: image/jpeg  Tamaño: 693 bytes
+
+

@@ -1,0 +1,18 @@
+Prueba A10 - 2026-11-23 21:27
+Objetivo: detener SQL Server, pedir GET /api/incidencias (esperado 500 sin detalles de SQL) y volver a iniciarlo.
+
+### Comprobación de permisos
+PowerShell: ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+Resultado: False (la consola no tiene privilegios de administrador)
+
+### Intento de detener el servicio
+PowerShell: Stop-Service -Name 'MSSQL$MSSQLSERVER01'
+Resultado: No se puede detener el servicio 'SQL Server (MSSQLSERVER01) (MSSQL$MSSQLSERVER01)' debido al error siguiente: No se puede abrir el servicio MSSQL$MSSQLSERVER01 en el equipo '.'.
+Estado del servicio después del intento: Running
+
+### Conclusión
+PRUEBA NO EJECUTADA: sin permisos de administrador no se pudo detener SQL Server, por lo que no se envió la petición GET /api/incidencias en esa condición.
+Para ejecutarla manualmente, desde una PowerShell "Ejecutar como administrador":
+  Stop-Service 'MSSQL$MSSQLSERVER01'
+  curl.exe -s -i http://localhost:5000/api/incidencias
+  Start-Service 'MSSQL$MSSQLSERVER01'

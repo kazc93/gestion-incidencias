@@ -1,0 +1,41 @@
+﻿Prueba A06 - 2026-11-23 21:26:36
+
+### Petición
+curl.exe -X POST http://localhost:5000/api/incidencias/9/asignar -H "Content-Type: application/json" --data-binary @asignar.json
+Cuerpo JSON (asignar.json): {"idResponsable":3,"idAsigna":2}
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:26:36 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Responsable asignado correctamente","data":{"incidenciaId":9,"folio":null,"estado":"ASIGNADA"}}
+
+
+### Petición
+curl.exe -X POST http://localhost:5000/api/incidencias/9/iniciar -H "Content-Type: application/json" --data-binary @iniciar.json
+Cuerpo JSON (iniciar.json): {"idEmpleado":3}
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:26:36 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Atención iniciada correctamente","data":{"incidenciaId":9,"folio":null,"estado":"EN_ATENCION"}}
+
+
+### Petición
+curl.exe -X POST http://localhost:5000/api/incidencias/9/resolver --form-string idEmpleado=3 --form-string "solucion=Se reemplazó el cable HDMI dañado del proyector" -F foto=@foto_resolucion.jpg;type=image/jpeg
+Archivo enviado: foto_resolucion.jpg (JPEG real 64x64, 693 bytes)
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:26:36 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Incidencia resuelta correctamente","data":{"incidenciaId":9,"folio":null,"estado":"RESUELTA"}}
+
+

@@ -1,0 +1,15 @@
+﻿Prueba A04 - 2026-11-23 21:25:19
+
+### Petición
+curl.exe http://localhost:5000/api/incidencias/1
+
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:25:19 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Detalle de incidencia obtenido correctamente","data":{"descripcion":"No enciende la lámpara del pasillo principal","responsableId":3,"solucion":"Se cambió la lámpara por una nueva","fechaResolucion":"2026-11-23T21:23:25.297","fotos":[{"tipoEvidencia":"INICIAL","url":"/fotos/inc1_inicial.jpg","nombreArchivo":"inc1_inicial.jpg","fechaCaptura":"2026-11-23T21:23:25.163"},{"tipoEvidencia":"FINAL","url":"/fotos/inc1_final.jpg","nombreArchivo":"inc1_final.jpg","fechaCaptura":"2026-11-23T21:23:25.3"}],"historial":[{"accion":"REGISTRO","estadoOrigen":null,"estadoDestino":"Pendiente","hechoPor":"Carlos Morales López","comentario":"Incidencia registrada","fechaAccion":"2026-11-23T21:23:25.163"},{"accion":"ASIGNACION","estadoOrigen":"Pendiente","estadoDestino":"Asignada","hechoPor":"Ana Pérez García","comentario":"Asignada a Luis","fechaAccion":"2026-11-23T21:23:25.233"},{"accion":"INICIO_ATENCION","estadoOrigen":"Asignada","estadoDestino":"En atención","hechoPor":"Luis Hernández Cruz","comentario":"Inicio de atención","fechaAccion":"2026-11-23T21:23:25.263"},{"accion":"RESOLUCION","estadoOrigen":"En atención","estadoDestino":"Resuelta","hechoPor":"Luis Hernández Cruz","comentario":"Incidencia resuelta","fechaAccion":"2026-11-23T21:23:25.3"}],"id":1,"folio":"INC-2026-00001","titulo":"Lámpara quemada","tipo":"Electricidad","prioridad":"Media","estadoId":4,"estadoClave":"RESUELTA","estado":"Resuelta","fechaRegistro":"2026-11-23T21:23:25.16","reporta":"Carlos Morales López","responsable":"Luis Hernández Cruz"}}
+
+

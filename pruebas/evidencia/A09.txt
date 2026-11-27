@@ -1,0 +1,28 @@
+﻿Prueba A09 - 2026-11-23 21:26:49
+
+### Petición
+curl.exe -X POST http://localhost:5000/api/incidencias --form-string titulo=Hola --form-string "descripcion=Prueba de validación de título demasiado corto" --form-string idTipo=1 --form-string idPrioridad=2 --form-string idReporta=1 -F foto=@foto_registro.jpg;type=image/jpeg
+Caso 1: título "Hola" (demasiado corto), foto JPG válida
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 400 Bad Request
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:26:49 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":false,"message":"Los datos enviados no son válidos. Revise los campos y sus tipos","data":null}
+
+
+### Petición
+curl.exe -X POST http://localhost:5000/api/incidencias --form-string "titulo=Prueba con archivo que no es imagen" --form-string "descripcion=Se envía un archivo de texto en lugar de una foto JPG" --form-string idTipo=1 --form-string idPrioridad=2 --form-string idReporta=1 -F foto=@no_es_imagen.txt;type=text/plain
+Caso 2: archivo no_es_imagen.txt (texto plano, 45 bytes) en el campo foto
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 400 Bad Request
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:26:49 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":false,"message":"La fotografía debe estar en formato JPG","data":null}
+
+

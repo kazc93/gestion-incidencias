@@ -1,0 +1,28 @@
+﻿Prueba A03 - 2026-11-23 21:25:19
+
+### Petición
+curl.exe http://localhost:5000/api/incidencias?estadoId=1
+
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:25:18 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Incidencias obtenidas correctamente","data":[{"id":8,"folio":"INC-2026-00008","titulo":"Puerta no cierra bien","tipo":"Infraestructura","prioridad":"Media","estadoId":1,"estadoClave":"PENDIENTE","estado":"Pendiente","fechaRegistro":"2026-11-23T21:23:25.19","reporta":"María Gómez Ixcoy","responsable":null},{"id":7,"folio":"INC-2026-00007","titulo":"Impresora sin conexión","tipo":"Equipo de cómputo","prioridad":"Media","estadoId":1,"estadoClave":"PENDIENTE","estado":"Pendiente","fechaRegistro":"2026-11-23T21:23:25.19","reporta":"Carlos Morales López","responsable":null}]}
+
+
+### Petición
+curl.exe http://localhost:5000/api/incidencias?tipoId=2
+
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:25:18 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Incidencias obtenidas correctamente","data":[{"id":7,"folio":"INC-2026-00007","titulo":"Impresora sin conexión","tipo":"Equipo de cómputo","prioridad":"Media","estadoId":1,"estadoClave":"PENDIENTE","estado":"Pendiente","fechaRegistro":"2026-11-23T21:23:25.19","reporta":"Carlos Morales López","responsable":null},{"id":3,"folio":"INC-2026-00003","titulo":"Computadora no enciende","tipo":"Equipo de cómputo","prioridad":"Crítica","estadoId":3,"estadoClave":"EN_ATENCION","estado":"En atención","fechaRegistro":"2026-11-23T21:23:25.177","reporta":"María Gómez Ixcoy","responsable":"Pedro Tzoc Batz"}]}
+
+

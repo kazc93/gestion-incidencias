@@ -1,0 +1,255 @@
+﻿Ejecucion de scripts - 2026-11-23 21:23:23
+Servidor: lpc:JoshuasPC\MSSQLSERVER01 (autenticacion de Windows -E, -C confiar en certificado local)
+
+===== No. 1 Script Creacion Tablas.sql =====
+Comando: sqlcmd -S lpc:JoshuasPC\MSSQLSERVER01 -E -C -b -f 65001 -i "No. 1 Script Creacion Tablas.sql"
+Changed database context to 'master'.
+Changed database context to 'incidencias'.
+name                                                                                                                            
+--------------------------------------------------------------------------------------------------------------------------------
+Empleado                                                                                                                        
+EstadoIncidencia                                                                                                                
+Prioridad                                                                                                                       
+TipoIncidencia                                                                                                                  
+
+(4 rows affected)
+Tablas     
+-----------
+          8
+
+(1 rows affected)
+LlavesForaneas
+--------------
+            12
+
+(1 rows affected)
+Checks     
+-----------
+          4
+
+(1 rows affected)
+Unicos     
+-----------
+          6
+
+(1 rows affected)
+--- exit code: 0
+
+===== No. 2 Script Catalogos.sql =====
+Comando: sqlcmd -S lpc:JoshuasPC\MSSQLSERVER01 -E -C -b -f 65001 -i "No. 2 Script Catalogos.sql"
+Changed database context to 'incidencias'.
+
+(4 rows affected)
+
+(4 rows affected)
+
+(7 rows affected)
+
+(6 rows affected)
+TotalEstados TotalPrioridades TotalTipos  TotalEmpleados
+------------ ---------------- ----------- --------------
+           4                4           7              6
+
+(1 rows affected)
+--- exit code: 0
+
+===== No. 3 Vistas e indices.sql =====
+Comando: sqlcmd -S lpc:JoshuasPC\MSSQLSERVER01 -E -C -b -f 65001 -i "No. 3 Vistas e indices.sql"
+Changed database context to 'incidencias'.
+--- exit code: 0
+
+===== No. 4 SP.sql =====
+Comando: sqlcmd -S lpc:JoshuasPC\MSSQLSERVER01 -E -C -b -f 65001 -i "No. 4 SP.sql"
+Changed database context to 'incidencias'.
+Procedimiento                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------
+sp_asignar_incidencia                                                                                                           
+sp_iniciar_atencion                                                                                                             
+sp_listar_empleados                                                                                                             
+sp_listar_estados                                                                                                               
+sp_listar_incidencias                                                                                                           
+sp_listar_prioridades                                                                                                           
+sp_listar_tipos                                                                                                                 
+sp_obtener_incidencia                                                                                                           
+sp_registrar_incidencia                                                                                                         
+sp_resolver_incidencia                                                                                                          
+
+(10 rows affected)
+--- exit code: 0
+
+===== No. 5 Datos de prueba.sql =====
+Comando: sqlcmd -S lpc:JoshuasPC\MSSQLSERVER01 -E -C -b -f 65001 -i "No. 5 Datos de prueba.sql"
+Changed database context to 'incidencias'.
+IncidenciaId Folio                Estado    Mensaje                            
+------------ -------------------- --------- -----------------------------------
+           1 INC-2026-00001       PENDIENTE Incidencia registrada correctamente
+IncidenciaId Folio                Estado    Mensaje                            
+------------ -------------------- --------- -----------------------------------
+           2 INC-2026-00002       PENDIENTE Incidencia registrada correctamente
+IncidenciaId Folio                Estado    Mensaje                            
+------------ -------------------- --------- -----------------------------------
+           3 INC-2026-00003       PENDIENTE Incidencia registrada correctamente
+IncidenciaId Folio                Estado    Mensaje                            
+------------ -------------------- --------- -----------------------------------
+           4 INC-2026-00004       PENDIENTE Incidencia registrada correctamente
+IncidenciaId Folio                Estado    Mensaje                            
+------------ -------------------- --------- -----------------------------------
+           5 INC-2026-00005       PENDIENTE Incidencia registrada correctamente
+IncidenciaId Folio                Estado    Mensaje                            
+------------ -------------------- --------- -----------------------------------
+           6 INC-2026-00006       PENDIENTE Incidencia registrada correctamente
+IncidenciaId Folio                Estado    Mensaje                            
+------------ -------------------- --------- -----------------------------------
+           7 INC-2026-00007       PENDIENTE Incidencia registrada correctamente
+IncidenciaId Folio                Estado    Mensaje                            
+------------ -------------------- --------- -----------------------------------
+           8 INC-2026-00008       PENDIENTE Incidencia registrada correctamente
+IncidenciaId Estado   Mensaje                          
+------------ -------- ---------------------------------
+           1 ASIGNADA Incidencia asignada correctamente
+IncidenciaId Estado   Mensaje                          
+------------ -------- ---------------------------------
+           2 ASIGNADA Incidencia asignada correctamente
+IncidenciaId Estado   Mensaje                          
+------------ -------- ---------------------------------
+           3 ASIGNADA Incidencia asignada correctamente
+IncidenciaId Estado   Mensaje                          
+------------ -------- ---------------------------------
+           4 ASIGNADA Incidencia asignada correctamente
+IncidenciaId Estado   Mensaje                          
+------------ -------- ---------------------------------
+           5 ASIGNADA Incidencia asignada correctamente
+IncidenciaId Estado   Mensaje                          
+------------ -------- ---------------------------------
+           6 ASIGNADA Incidencia asignada correctamente
+IncidenciaId Estado      Mensaje                        
+------------ ----------- -------------------------------
+           1 EN_ATENCION Atención iniciada correctamente
+IncidenciaId Estado      Mensaje                        
+------------ ----------- -------------------------------
+           2 EN_ATENCION Atención iniciada correctamente
+IncidenciaId Estado      Mensaje                        
+------------ ----------- -------------------------------
+           3 EN_ATENCION Atención iniciada correctamente
+IncidenciaId Estado      Mensaje                        
+------------ ----------- -------------------------------
+           4 EN_ATENCION Atención iniciada correctamente
+IncidenciaId Estado   Mensaje                          
+------------ -------- ---------------------------------
+           1 RESUELTA Incidencia resuelta correctamente
+IncidenciaId Estado   Mensaje                          
+------------ -------- ---------------------------------
+           2 RESUELTA Incidencia resuelta correctamente
+IncidenciaId Folio                Titulo                                                                                                                   TipoId      Tipo                                                                             Prioridad                                EstadoId    EstadoClave          Estado                                   FechaRegistro           Reporta                                                                                                                                                                                                   Responsable                                                                                                                                                                                              
+------------ -------------------- ------------------------------------------------------------------------------------------------------------------------ ----------- -------------------------------------------------------------------------------- ---------------------------------------- ----------- -------------------- ---------------------------------------- ----------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+           1 INC-2026-00001       Lámpara quemada                                                                                                                    5 Electricidad                                                                     Media                                              4 RESUELTA             Resuelta                                 2026-11-23 21:23:25.160 Carlos Morales López                                                                                                                                                                                      Luis Hernández Cruz                                                                                                                                                                                      
+           2 INC-2026-00002       Internet lento en oficina                                                                                                          1 Red e internet                                                                   Alta                                               4 RESUELTA             Resuelta                                 2026-11-23 21:23:25.177 Ana Pérez García                                                                                                                                                                                          María Gómez Ixcoy                                                                                                                                                                                        
+           3 INC-2026-00003       Computadora no enciende                                                                                                            2 Equipo de cómputo                                                                Crítica                                            3 EN_ATENCION          En atención                              2026-11-23 21:23:25.177 María Gómez Ixcoy                                                                                                                                                                                         Pedro Tzoc Batz                                                                                                                                                                                          
+           4 INC-2026-00004       Silla rota                                                                                                                         4 Mobiliario                                                                       Baja                                               3 EN_ATENCION          En atención                              2026-11-23 21:23:25.180 Pedro Tzoc Batz                                                                                                                                                                                           Sofía Ramírez Castillo                                                                                                                                                                                   
+           5 INC-2026-00005       Gotera en el techo                                                                                                                 3 Infraestructura                                                                  Alta                                               2 ASIGNADA             Asignada                                 2026-11-23 21:23:25.183 Sofía Ramírez Castillo                                                                                                                                                                                    Luis Hernández Cruz                                                                                                                                                                                      
+           6 INC-2026-00006       Piso sucio en pasillo                                                                                                              6 Limpieza                                                                         Baja                                               2 ASIGNADA             Asignada                                 2026-11-23 21:23:25.187 Luis Hernández Cruz                                                                                                                                                                                       María Gómez Ixcoy                                                                                                                                                                                        
+           7 INC-2026-00007       Impresora sin conexión                                                                                                             2 Equipo de cómputo                                                                Media                                              1 PENDIENTE            Pendiente                                2026-11-23 21:23:25.190 Carlos Morales López                                                                                                                                                                                      NULL                                                                                                                                                                                                     
+           8 INC-2026-00008       Puerta no cierra bien                                                                                                              3 Infraestructura                                                                  Media                                              1 PENDIENTE            Pendiente                                2026-11-23 21:23:25.190 María Gómez Ixcoy                                                                                                                                                                                         NULL                                                                                                                                                                                                     
+
+(8 rows affected)
+--- exit code: 0
+
+===== No.6 Consultas y reportes.sql =====
+Comando: sqlcmd -S lpc:JoshuasPC\MSSQLSERVER01 -E -C -b -f 65001 -i "No.6 Consultas y reportes.sql"
+Changed database context to 'incidencias'.
+Total_Incidencias
+-----------------
+                8
+
+(1 rows affected)
+Estado                                   Cantidad   
+---------------------------------------- -----------
+Pendiente                                          2
+Asignada                                           2
+En atención                                        2
+Resuelta                                           2
+
+(4 rows affected)
+Tipo                                                                             Cantidad   
+-------------------------------------------------------------------------------- -----------
+Equipo de cómputo                                                                          2
+Infraestructura                                                                            2
+Mobiliario                                                                                 1
+Electricidad                                                                               1
+Limpieza                                                                                   1
+Red e internet                                                                             1
+Otro                                                                                       0
+
+(7 rows affected)
+Prioridad                                Cantidad   
+---------------------------------------- -----------
+Crítica                                            1
+Alta                                               2
+Media                                              3
+Baja                                               2
+
+(4 rows affected)
+Responsable                                                                                                                                                                                               Cantidad   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -----------
+Luis Hernández Cruz                                                                                                                                                                                                 2
+María Gómez Ixcoy                                                                                                                                                                                                   2
+Pedro Tzoc Batz                                                                                                                                                                                                     1
+Sofía Ramírez Castillo                                                                                                                                                                                              1
+
+(4 rows affected)
+Empleado                                                                                                                                                                                                  Cantidad   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -----------
+Carlos Morales López                                                                                                                                                                                                2
+María Gómez Ixcoy                                                                                                                                                                                                   2
+Pedro Tzoc Batz                                                                                                                                                                                                     1
+Sofía Ramírez Castillo                                                                                                                                                                                              1
+Ana Pérez García                                                                                                                                                                                                    1
+Luis Hernández Cruz                                                                                                                                                                                                 1
+
+(6 rows affected)
+IncidenciaId Folio                Titulo                                                                                                                   TipoId      Tipo                                                                             Prioridad                                EstadoId    EstadoClave          Estado                                   FechaRegistro           Reporta                                                                                                                                                                                                   Responsable                                                                                                                                                                                              
+------------ -------------------- ------------------------------------------------------------------------------------------------------------------------ ----------- -------------------------------------------------------------------------------- ---------------------------------------- ----------- -------------------- ---------------------------------------- ----------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+           7 INC-2026-00007       Impresora sin conexión                                                                                                             2 Equipo de cómputo                                                                Media                                              1 PENDIENTE            Pendiente                                2026-11-23 21:23:25.190 Carlos Morales López                                                                                                                                                                                      NULL                                                                                                                                                                                                     
+           8 INC-2026-00008       Puerta no cierra bien                                                                                                              3 Infraestructura                                                                  Media                                              1 PENDIENTE            Pendiente                                2026-11-23 21:23:25.190 María Gómez Ixcoy                                                                                                                                                                                         NULL                                                                                                                                                                                                     
+
+(2 rows affected)
+IncidenciaId Folio                Titulo                                                                                                                   TipoId      Tipo                                                                             Prioridad                                EstadoId    EstadoClave          Estado                                   FechaRegistro           Reporta                                                                                                                                                                                                   Responsable                                                                                                                                                                                              
+------------ -------------------- ------------------------------------------------------------------------------------------------------------------------ ----------- -------------------------------------------------------------------------------- ---------------------------------------- ----------- -------------------- ---------------------------------------- ----------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+           7 INC-2026-00007       Impresora sin conexión                                                                                                             2 Equipo de cómputo                                                                Media                                              1 PENDIENTE            Pendiente                                2026-11-23 21:23:25.190 Carlos Morales López                                                                                                                                                                                      NULL                                                                                                                                                                                                     
+           8 INC-2026-00008       Puerta no cierra bien                                                                                                              3 Infraestructura                                                                  Media                                              1 PENDIENTE            Pendiente                                2026-11-23 21:23:25.190 María Gómez Ixcoy                                                                                                                                                                                         NULL                                                                                                                                                                                                     
+
+(2 rows affected)
+IncidenciaId Folio                Titulo                                                                                                                   TipoId      Tipo                                                                             Prioridad                                EstadoId    EstadoClave          Estado                                   FechaRegistro           Reporta                                                                                                                                                                                                   Responsable                                                                                                                                                                                              
+------------ -------------------- ------------------------------------------------------------------------------------------------------------------------ ----------- -------------------------------------------------------------------------------- ---------------------------------------- ----------- -------------------- ---------------------------------------- ----------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+           1 INC-2026-00001       Lámpara quemada                                                                                                                    5 Electricidad                                                                     Media                                              4 RESUELTA             Resuelta                                 2026-11-23 21:23:25.160 Carlos Morales López                                                                                                                                                                                      Luis Hernández Cruz                                                                                                                                                                                      
+           2 INC-2026-00002       Internet lento en oficina                                                                                                          1 Red e internet                                                                   Alta                                               4 RESUELTA             Resuelta                                 2026-11-23 21:23:25.177 Ana Pérez García                                                                                                                                                                                          María Gómez Ixcoy                                                                                                                                                                                        
+           3 INC-2026-00003       Computadora no enciende                                                                                                            2 Equipo de cómputo                                                                Crítica                                            3 EN_ATENCION          En atención                              2026-11-23 21:23:25.177 María Gómez Ixcoy                                                                                                                                                                                         Pedro Tzoc Batz                                                                                                                                                                                          
+           4 INC-2026-00004       Silla rota                                                                                                                         4 Mobiliario                                                                       Baja                                               3 EN_ATENCION          En atención                              2026-11-23 21:23:25.180 Pedro Tzoc Batz                                                                                                                                                                                           Sofía Ramírez Castillo                                                                                                                                                                                   
+           5 INC-2026-00005       Gotera en el techo                                                                                                                 3 Infraestructura                                                                  Alta                                               2 ASIGNADA             Asignada                                 2026-11-23 21:23:25.183 Sofía Ramírez Castillo                                                                                                                                                                                    Luis Hernández Cruz                                                                                                                                                                                      
+           6 INC-2026-00006       Piso sucio en pasillo                                                                                                              6 Limpieza                                                                         Baja                                               2 ASIGNADA             Asignada                                 2026-11-23 21:23:25.187 Luis Hernández Cruz                                                                                                                                                                                       María Gómez Ixcoy                                                                                                                                                                                        
+           7 INC-2026-00007       Impresora sin conexión                                                                                                             2 Equipo de cómputo                                                                Media                                              1 PENDIENTE            Pendiente                                2026-11-23 21:23:25.190 Carlos Morales López                                                                                                                                                                                      NULL                                                                                                                                                                                                     
+           8 INC-2026-00008       Puerta no cierra bien                                                                                                              3 Infraestructura                                                                  Media                                              1 PENDIENTE            Pendiente                                2026-11-23 21:23:25.190 María Gómez Ixcoy                                                                                                                                                                                         NULL                                                                                                                                                                                                     
+
+(8 rows affected)
+Folio                Titulo                                                                                                                   Solucion                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 FechaResolucion        
+-------------------- ------------------------------------------------------------------------------------------------------------------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -----------------------
+INC-2026-00001       Lámpara quemada                                                                                                          Se cambió la lámpara por una nueva                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       2026-11-23 21:23:25.297
+INC-2026-00002       Internet lento en oficina                                                                                                Se reinició y se reconfiguró el router                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   2026-11-23 21:23:25.300
+
+(2 rows affected)
+Accion                         Estado_Origen                            Estado_Destino                           Hecho_Por                                                                                                                                                                                                 FechaAccion            
+------------------------------ ---------------------------------------- ---------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -----------------------
+REGISTRO                       NULL                                     Pendiente                                Carlos Morales López                                                                                                                                                                                      2026-11-23 21:23:25.163
+ASIGNACION                     Pendiente                                Asignada                                 Ana Pérez García                                                                                                                                                                                          2026-11-23 21:23:25.233
+INICIO_ATENCION                Asignada                                 En atención                              Luis Hernández Cruz                                                                                                                                                                                       2026-11-23 21:23:25.263
+RESOLUCION                     En atención                              Resuelta                                 Luis Hernández Cruz                                                                                                                                                                                       2026-11-23 21:23:25.300
+
+(4 rows affected)
+TipoEvidencia NombreArchivo                                                                                                                                                                                            UrlAlmacenamiento                                                                                                                                                                                                                                                                                                                                                                                                FechaCaptura           
+------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -----------------------
+INICIAL       inc1_inicial.jpg                                                                                                                                                                                         /fotos/inc1_inicial.jpg                                                                                                                                                                                                                                                                                                                                                                                          2026-11-23 21:23:25.163
+FINAL         inc1_final.jpg                                                                                                                                                                                           /fotos/inc1_final.jpg                                                                                                                                                                                                                                                                                                                                                                                            2026-11-23 21:23:25.300
+
+(2 rows affected)
+--- exit code: 0
+

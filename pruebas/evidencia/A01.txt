@@ -1,0 +1,54 @@
+﻿Prueba A01 - 2026-11-23 21:25:19
+
+### Petición
+curl.exe http://localhost:5000/api/estados
+
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:25:18 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Estados obtenidos correctamente","data":[{"id":1,"clave":"PENDIENTE","nombre":"Pendiente"},{"id":2,"clave":"ASIGNADA","nombre":"Asignada"},{"id":3,"clave":"EN_ATENCION","nombre":"En atención"},{"id":4,"clave":"RESUELTA","nombre":"Resuelta"}]}
+
+
+### Petición
+curl.exe http://localhost:5000/api/tipos
+
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:25:18 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Tipos obtenidos correctamente","data":[{"id":5,"clave":"ELECTRICIDAD","nombre":"Electricidad"},{"id":2,"clave":"EQUIPO","nombre":"Equipo de cómputo"},{"id":3,"clave":"INFRA","nombre":"Infraestructura"},{"id":6,"clave":"LIMPIEZA","nombre":"Limpieza"},{"id":4,"clave":"MOBILIARIO","nombre":"Mobiliario"},{"id":7,"clave":"OTRO","nombre":"Otro"},{"id":1,"clave":"RED","nombre":"Red e internet"}]}
+
+
+### Petición
+curl.exe http://localhost:5000/api/prioridades
+
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:25:18 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Prioridades obtenidas correctamente","data":[{"id":1,"clave":"BAJA","nombre":"Baja"},{"id":2,"clave":"MEDIA","nombre":"Media"},{"id":3,"clave":"ALTA","nombre":"Alta"},{"id":4,"clave":"CRITICA","nombre":"Crítica"}]}
+
+
+### Petición
+curl.exe http://localhost:5000/api/empleados
+
+### Respuesta (código HTTP, cabeceras y cuerpo)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 24 Nov 2026 03:25:18 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"success":true,"message":"Empleados obtenidos correctamente","data":[{"id":2,"clave":"EMP-002","nombre":"Ana Pérez García"},{"id":1,"clave":"EMP-001","nombre":"Carlos Morales López"},{"id":3,"clave":"EMP-003","nombre":"Luis Hernández Cruz"},{"id":4,"clave":"EMP-004","nombre":"María Gómez Ixcoy"},{"id":5,"clave":"EMP-005","nombre":"Pedro Tzoc Batz"},{"id":6,"clave":"EMP-006","nombre":"Sofía Ramírez Castillo"}]}
+
+
